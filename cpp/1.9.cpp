@@ -1,6 +1,7 @@
 // Sử dụng C-Free 5
 
-#include <iostream>
+#include <iostream> // cin, cout, endl
+#include <cmath> // sqrt
 
 using namespace std;
 
@@ -25,7 +26,10 @@ void xuat (unsigned * danhsach, unsigned soluong);
 void xuat (unsigned sieunguyento);
 
 // Hàm kiểm tra siêu nguyên tố
-void sieunguyento (unsigned * danhsach, unsigned & soluong, unsigned sochuso);
+void sieunguyento (unsigned * danhsach, unsigned & soluong, unsigned sochuso, unsigned batdau = 0);
+
+// Hàm kiểm tra số nguyên tố
+bool nguyentole (unsigned songuyenle);
 
 /* NỘI DUNG */
 
@@ -33,7 +37,7 @@ int main () {
   unsigned sochuso = nhap();
   unsigned danhsach[SO_LUONG_TOI_DA];
   unsigned soluong;
-  sieunguyento(danhsach, soluong, sochuso);
+  sieunguyento(danhsach, soluong, sochuso + 1, 0);
   xuat(danhsach, soluong);
   return 0;
 }
@@ -46,6 +50,7 @@ unsigned nhap () {
 }
 
 void xuat (unsigned * danhsach, unsigned soluong) {
+  cout << "Co tong cong " << soluong << " sieu nguyen to co n chu so.\n";
   for (unsigned i = 0; i != soluong; ++i) {
     xuat(danhsach[i]);
   }
@@ -57,4 +62,26 @@ void xuat (unsigned sieunguyento) {
     sieunguyento /= 10;
   }
   cout << endl;
+}
+
+void sieunguyento (unsigned * danhsach, unsigned & soluong, unsigned sochuso, unsigned batdau) {
+  if (sochuso) {
+    soluong = 0;
+    for (unsigned i = 0; i != SO_CHU_SO_NGUYEN_TO; ++i) {
+      const unsigned batdaumoi = 10 * batdau + CHU_SO_NGUYEN_TO[i];
+      if (nguyentole(batdaumoi)) {
+        unsigned soluongthem;
+        sieunguyento(danhsach + soluong, soluongthem, sochuso - 1, batdaumoi);
+        soluong += soluongthem;
+      }
+    }
+  } else {
+    soluong = 1;
+  }
+}
+
+bool nguyentole (unsigned songuyenle) {
+  unsigned i = 3, e = sqrt(songuyenle);
+  while (songuyenle % i && i < e) ++i;
+  return i >= e;
 }
