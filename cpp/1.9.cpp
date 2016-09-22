@@ -37,16 +37,20 @@ int main () {
   unsigned sochuso = nhap();
   unsigned danhsach[SO_LUONG_TOI_DA];
   unsigned soluong;
-  sieunguyento(danhsach, soluong, sochuso + 1, 0);
+  sieunguyento(danhsach, soluong, sochuso, 0);
   xuat(danhsach, soluong);
   return 0;
 }
 
 unsigned nhap () {
   unsigned n;
-  cout << "Nhap so chu so: ";
+  cout << "Nhap so chu so (n > 1): ";
   cin >> n;
-  return n;
+  if (n > 1) {
+    return n;
+  }
+  cout << "Nhap sai. Nhap lai.\n";
+  return nhap();
 }
 
 void xuat (unsigned * danhsach, unsigned soluong) {
@@ -76,6 +80,7 @@ void sieunguyento (unsigned * danhsach, unsigned & soluong, unsigned sochuso, un
       }
     }
   } else {
+    * danhsach = batdau;
     soluong = 1;
   }
 }
