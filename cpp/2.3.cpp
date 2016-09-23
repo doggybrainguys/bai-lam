@@ -124,8 +124,12 @@ void xuat (BanCo banco) {
   ;
 }
 
-void datquanhau (CSDL & csdl, unsigned trongso) {
+void datquanhau (CSDL & csdl, unsigned soluong, unsigned trongso) {
+  for (unsigned x = 0; x != BanCo::KICHTHUOC; ++x) {
+    for (unsigned y = 0; y != BanCo::KICHTHUOC; ++y) {
 
+    }
+  }
 }
 
 unsigned ngaunhien (unsigned max) {
