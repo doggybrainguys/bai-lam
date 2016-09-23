@@ -73,9 +73,9 @@ void xuat (BanCo banco);
 // Các hàm tính toán
 void giaibaitoan (CSDL & csdl, unsigned soluong);
 void datquanhau (CSDL & csdl, bool & thanhcong, unsigned & trongso, unsigned soluong);
+void datquanhau (DauVet & dauvet, ToaDo toado);
 bool kiemtra (DauVet dauvet, ToaDo taodo);
 bool kiemtra (ToaDo a, ToaDo b);
-void datquanhau (DauVet & dauvet, ToaDo toado);
 
 // Các hàm tiện ích
 unsigned ngaunhien (unsigned max);
@@ -180,6 +180,11 @@ void datquanhau (CSDL & csdl, bool & thanhcong, unsigned & trongso, unsigned sol
   }
 }
 
+void datquanhau (DauVet & dauvet, ToaDo toado) {
+  dauvet.dadat[dauvet.soluong] = toado;
+  ++dauvet.soluong;
+}
+
 bool kiemtra (DauVet dauvet, ToaDo toado) {
   for (unsigned i = 0; i != dauvet.soluong; ++i) {
     if (! kiemtra(toado, dauvet.dadat[i])) {
@@ -196,11 +201,6 @@ bool kiemtra (ToaDo a, ToaDo b) {
     a.x - b.x != a.y - b.y &&
     a.x + b.x != a.y + b.y
   );
-}
-
-void datquanhau (DauVet & dauvet, ToaDo toado) {
-  dauvet.dadat[dauvet.soluong] = toado;
-  ++dauvet.soluong;
 }
 
 unsigned ngaunhien (unsigned max) {
