@@ -79,7 +79,6 @@ void datquanhau (DauVet & dauvet, ToaDo toado);
 
 // Các hàm tiện ích
 unsigned ngaunhien (unsigned max);
-template <typename GiaTri> void xoamang (GiaTri * mang, unsigned dodai, GiaTri giatri);
 
 /* NỘI DUNG */
 
@@ -207,11 +206,4 @@ void datquanhau (DauVet & dauvet, ToaDo toado) {
 
 unsigned ngaunhien (unsigned max) {
   return max * rand() / RAND_MAX;
-}
-
-template <typename GiaTri>
-void xoamang (GiaTri * mang, unsigned dodai, GiaTri giatri) {
-  for (GiaTri * i = mang, * e = mang + dodai; i != e; ++i) {
-    * i = giatri;
-  }
 }
