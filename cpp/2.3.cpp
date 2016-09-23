@@ -47,8 +47,8 @@ struct BanCo {
 
 struct DauVet {
   static const unsigned KICHTHUOC = BanCo::KICHTHUOC;
-  typedef bool Mang[KICHTHUOC];
-  Mang ngang, doc, cheothuan, cheongich;
+  ToaDo dadat[KICHTHUOC];
+  unsigned soluong;
 };
 
 struct CSDL {
@@ -72,7 +72,7 @@ void xuat (BanCo banco);
 
 // Các hàm tính toán
 void giaibaitoan (CSDL & csdl, unsigned soluong);
-void datquanhau (CSDL & csdl, unsigned & trongso, unsigned soluong);
+void datquanhau (CSDL & csdl, bool & thanhcong, unsigned & trongso, unsigned soluong);
 bool kiemtra (DauVet dauvet, ToaDo taodo);
 
 // Các hàm tiện ích
@@ -103,10 +103,7 @@ void khoitao (BanCo & banco) {
 }
 
 void khoitao (DauVet & dauvet) {
-  xoamang(dauvet.ngang, DauVet::KICHTHUOC, false);
-  xoamang(dauvet.doc, DauVet::KICHTHUOC, false);
-  xoamang(dauvet.cheothuan, DauVet::KICHTHUOC, false);
-  xoamang(dauvet.cheongich, DauVet::KICHTHUOC, false);
+  dauvet.soluong = 0;
 }
 
 void xuat (CSDL csdl) {
@@ -140,21 +137,44 @@ void xuat (BanCo banco) {
 
 void giaibaitoan (CSDL & csdl, unsigned soluong) {
   unsigned trongso = 0;
-  datquanhau(csdl, trongso, soluong);
+  bool thanhcong;
+  datquanhau(csdl, thanhcong, trongso, soluong);
 }
 
-void datquanhau (CSDL & csdl, unsigned & trongso, unsigned soluong) {
-  CSDL csdlmoi = csdl;
-  unsigned trongsothem = 0;
-  for (unsigned x = 0; x != BanCo::KICHTHUOC; ++x) {
-    for (unsigned y = 0; y != BanCo::KICHTHUOC; ++y) {
-      const ToaDo toado(x, y);
-      CSDL csdlss = csdl;
-
+void datquanhau (CSDL & csdl, bool & thanhcong, unsigned & trongso, unsigned soluong) {
+  if (soluong) {
+    if (csdl.dauvet.soluong == DauVet::KICHTHUOC) {
+      thanhcong = false;
+    } else {
+      CSDL csdlmoi = csdl;
+      unsigned trongsothem = 0;
+      for (unsigned x = 0; x != BanCo::KICHTHUOC; ++x) {
+        for (unsigned y = 0; y != BanCo::KICHTHUOC; ++y) {
+          const ToaDo toado(x, y);
+          CSDL csdlss = csdl;
+          unsigned trongsoss = 0;
+          for (unsigned i = 0; i != csdl.dauvet.soluong; ++i) {
+            if (kiemtra(dauvet, toado)) {
+              datquanhau(csdlss, thanhcong, trongsoss, soluong - 1);
+              if (thanhcong) {
+                if (trongsoss > trongsothem) {
+                  csdlmoi = csdlss;
+                  trongsothem = trongsoss;
+                }
+              } else {
+                return;
+              }
+            }
+          }
+        }
+      }
+      csdl = csdlmoi;
+      trongso += trongsothem;
     }
+  } else {
+    thanhcong = true;
+    trongso = 0;
   }
-  csdl = csdlmoi;
-  trongso += trongsothem;
 }
 
 unsigned ngaunhien (unsigned max) {
