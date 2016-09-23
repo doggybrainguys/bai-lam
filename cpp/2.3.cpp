@@ -189,6 +189,11 @@ bool kiemtra (DauVet dauvet, ToaDo toado) {
   return true;
 }
 
+void datquanhau (DauVet & dauvet, ToaDo toado) {
+  dauvet.dadat[dauvet.soluong] = toado;
+  ++dauvet.soluong;
+}
+
 unsigned ngaunhien (unsigned max) {
   return max * rand() / RAND_MAX;
 }
