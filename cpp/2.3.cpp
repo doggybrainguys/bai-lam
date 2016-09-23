@@ -155,14 +155,14 @@ void datquanhau (CSDL & csdl, bool & thanhcong, unsigned & trongso, unsigned sol
           unsigned trongsoss = 0;
           for (unsigned i = 0; i != csdl.dauvet.soluong; ++i) {
             if (kiemtra(dauvet, toado)) {
-              datquanhau(csdlss, thanhcong, trongsoss, soluong - 1);
-              if (thanhcong) {
+              bool thanhcongmoi;
+              datquanhau(csdlss, thanhcongmoi, trongsoss, soluong - 1);
+              if (thanhcongmoi) {
+                thanhcong = true;
                 if (trongsoss > trongsothem) {
                   csdlmoi = csdlss;
                   trongsothem = trongsoss;
                 }
-              } else {
-                return;
               }
             }
           }
