@@ -74,6 +74,7 @@ void xuat (BanCo banco);
 void giaibaitoan (CSDL & csdl, unsigned soluong);
 void datquanhau (CSDL & csdl, bool & thanhcong, unsigned & trongso, unsigned soluong);
 bool kiemtra (DauVet dauvet, ToaDo taodo);
+void datquanhau (DauVet & dauvet, ToaDo toado);
 
 // Các hàm tiện ích
 unsigned ngaunhien (unsigned max);
@@ -148,15 +149,17 @@ void datquanhau (CSDL & csdl, bool & thanhcong, unsigned & trongso, unsigned sol
     } else {
       CSDL csdlmoi = csdl;
       unsigned trongsothem = 0;
+      --soluong;
       for (unsigned x = 0; x != BanCo::KICHTHUOC; ++x) {
         for (unsigned y = 0; y != BanCo::KICHTHUOC; ++y) {
           const ToaDo toado(x, y);
           CSDL csdlss = csdl;
           unsigned trongsoss = 0;
           for (unsigned i = 0; i != csdl.dauvet.soluong; ++i) {
-            if (kiemtra(dauvet, toado)) {
+            if (kiemtra(csdlss.dauvet, toado)) {
               bool thanhcongmoi;
-              datquanhau(csdlss, thanhcongmoi, trongsoss, soluong - 1);
+              datquanhau(csdlss.dauvet, toado);
+              datquanhau(csdlss, thanhcongmoi, trongsoss, soluong);
               if (thanhcongmoi) {
                 thanhcong = true;
                 if (trongsoss > trongsothem) {
