@@ -180,6 +180,15 @@ void datquanhau (CSDL & csdl, bool & thanhcong, unsigned & trongso, unsigned sol
   }
 }
 
+bool kiemtra (DauVet dauvet, ToaDo toado) {
+  for (unsigned i = 0; i != dauvet.soluong; ++i) {
+    if (taodo == dauvet.dadat[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
 unsigned ngaunhien (unsigned max) {
   return max * rand() / RAND_MAX;
 }
