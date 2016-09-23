@@ -74,6 +74,7 @@ void xuat (BanCo banco);
 void giaibaitoan (CSDL & csdl, unsigned soluong);
 void datquanhau (CSDL & csdl, bool & thanhcong, unsigned & trongso, unsigned soluong);
 bool kiemtra (DauVet dauvet, ToaDo taodo);
+bool sosanh (ToaDo a, ToaDo b);
 void datquanhau (DauVet & dauvet, ToaDo toado);
 
 // Các hàm tiện ích
@@ -182,11 +183,15 @@ void datquanhau (CSDL & csdl, bool & thanhcong, unsigned & trongso, unsigned sol
 
 bool kiemtra (DauVet dauvet, ToaDo toado) {
   for (unsigned i = 0; i != dauvet.soluong; ++i) {
-    if (taodo == dauvet.dadat[i]) {
+    if (sosanh(toado, dauvet.dadat[i])) {
       return false;
     }
   }
   return true;
+}
+
+bool sosanh (ToaDo a, ToaDo b) {
+  return a.x == b.x && a.y == b.y;
 }
 
 void datquanhau (DauVet & dauvet, ToaDo toado) {
