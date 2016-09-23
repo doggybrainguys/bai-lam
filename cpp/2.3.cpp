@@ -7,6 +7,11 @@
 
 using namespace std;
 
+/* CÁC HẰNG SỐ */
+
+const unsigned SOHAUCANDAT = 8;
+const unsigned TRONGSOTOIDA = 10;
+
 /* KIỂU DỮ LIỆU */
 
 struct QuanCo {
@@ -53,7 +58,7 @@ void xuat (CSDL csdl);
 void xuat (BanCo banco);
 
 // Các hàm tính toán
-void datquanhau (CSDL & csdl, unsigned trongso = 0);
+void datquanhau (CSDL & csdl, unsigned soluong, unsigned trongso = 0);
 bool kiemtra (DauVet dauvet, ToaDo taodo);
 
 // Các hàm tiện ích
@@ -66,7 +71,7 @@ int main () {
   CSDL csdl;
   srand(time(NULL));
   khoitao(csdl);
-  datquanhau(csdl);
+  datquanhau(csdl, SOHAUCANDAT);
   xuat(csdl);
   return 0;
 }
@@ -79,7 +84,7 @@ void khoitao (CSDL & csdl) {
 void khoitao (BanCo & banco) {
   for (QuanCo * i = banco.quanco.day, * e = i + BanCo::SOQUANCO; i != e; ++i) {
     i->chiem = false;
-    i->trongso = ngaunhien(10);
+    i->trongso = ngaunhien(TRONGSOTOIDA);
   }
 }
 
@@ -119,7 +124,9 @@ void xuat (BanCo banco) {
   ;
 }
 
-void datquanhau (CSDL &, unsigned) {}
+void datquanhau (CSDL & csdl, unsigned trongso) {
+
+}
 
 unsigned ngaunhien (unsigned max) {
   return max * rand() / RAND_MAX;
