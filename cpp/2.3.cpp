@@ -114,7 +114,7 @@ void xuat (BanCo banco) {
   cout << "Tong trong so (n): " << tongtrongso << endl;
   cout <<
     "Chu thich:\n"
-    " - Trong:   .n\n"
+    " - Con trong:   .n\n"
     " - Co hau:  *n\n"
   ;
 }
