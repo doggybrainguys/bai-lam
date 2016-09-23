@@ -193,7 +193,8 @@ bool kiemtra (DauVet dauvet, ToaDo toado) {
 
 bool kiemtra (ToaDo a, ToaDo b) {
   return (
-    a.x != b.x && a.y != b.y &&
+    a.x != b.x &&
+    a.y != b.y &&
     a.x - b.x != a.y - b.y &&
     a.x + b.x != a.y + b.y
   );
