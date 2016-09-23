@@ -145,11 +145,11 @@ void giaibaitoan (CSDL & csdl, unsigned soluong) {
 
 void datquanhau (CSDL & csdl, bool & thanhcong, unsigned & trongso, unsigned soluong) {
   if (soluong) {
-    if (csdl.dauvet.soluong == DauVet::KICHTHUOC) {
-      thanhcong = false;
-    } else {
+    if (csdl.dauvet.soluong != DauVet::KICHTHUOC) {
       CSDL csdlmoi = csdl;
       unsigned trongsothem = 0;
+      bool thanhcongmoi;
+      thanhcong = false;
       --soluong;
       for (unsigned x = 0; x != BanCo::KICHTHUOC; ++x) {
         for (unsigned y = 0; y != BanCo::KICHTHUOC; ++y) {
@@ -158,7 +158,6 @@ void datquanhau (CSDL & csdl, bool & thanhcong, unsigned & trongso, unsigned sol
           unsigned trongsoss = 0;
           for (unsigned i = 0; i != csdl.dauvet.soluong; ++i) {
             if (kiemtra(csdlss.dauvet, toado)) {
-              bool thanhcongmoi;
               datquanhau(csdlss.dauvet, toado);
               datquanhau(csdlss, thanhcongmoi, trongsoss, soluong);
               if (thanhcongmoi) {
@@ -172,12 +171,14 @@ void datquanhau (CSDL & csdl, bool & thanhcong, unsigned & trongso, unsigned sol
           }
         }
       }
-      csdl = csdlmoi;
-      trongso += trongsothem;
+      if (thanhcong) {
+        csdl = csdlmoi;
+        trongso += trongsothem;
+      }
     }
   } else {
     thanhcong = true;
-    trongso = 0;
+    trongso = 1;
   }
 }
 
