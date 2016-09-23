@@ -14,15 +14,15 @@ const unsigned TRONGSOTOIDA = 10;
 
 /* KIỂU DỮ LIỆU */
 
-struct CSDL;
+struct QuanCo;
 struct BanCo;
 struct DauVet;
-struct QuanCo;
+struct CSDL;
 struct ToaDo;
 
-struct CSDL {
-  BanCo banco;
-  DauVet dauvet;
+struct QuanCo {
+  bool chiem;
+  unsigned trongso;
 };
 
 struct BanCo {
@@ -40,9 +40,9 @@ struct DauVet {
   Mang ngang, doc, cheothuan, cheongich;
 };
 
-struct QuanCo {
-  bool chiem;
-  unsigned trongso;
+struct CSDL {
+  BanCo banco;
+  DauVet dauvet;
 };
 
 struct ToaDo {
