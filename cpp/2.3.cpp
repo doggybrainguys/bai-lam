@@ -14,9 +14,15 @@ const unsigned TRONGSOTOIDA = 10;
 
 /* KIỂU DỮ LIỆU */
 
-struct QuanCo {
-  bool chiem;
-  unsigned trongso;
+struct CSDL;
+struct BanCo;
+struct DauVet;
+struct QuanCo;
+struct ToaDo;
+
+struct CSDL {
+  BanCo banco;
+  DauVet dauvet;
 };
 
 struct BanCo {
@@ -34,13 +40,14 @@ struct DauVet {
   Mang ngang, doc, cheothuan, cheongich;
 };
 
-struct CSDL {
-  BanCo banco;
-  DauVet dauvet;
+struct QuanCo {
+  bool chiem;
+  unsigned trongso;
 };
 
 struct ToaDo {
   unsigned x, y;
+  ToaDo (unsigned _x = 0, unsigned _y = 0): x(_x), y(_y) {}
 };
 
 /* CÁC HÀM CẦN XÂY DỰNG */
@@ -58,7 +65,8 @@ void xuat (CSDL csdl);
 void xuat (BanCo banco);
 
 // Các hàm tính toán
-void datquanhau (CSDL & csdl, unsigned soluong, unsigned trongso = 0);
+void giaibaitoan (CSDL & csdl, unsigned soluong);
+void datquanhau (CSDL & csdl, unsigned & trongso, unsigned soluong);
 bool kiemtra (DauVet dauvet, ToaDo taodo);
 
 // Các hàm tiện ích
@@ -71,7 +79,7 @@ int main () {
   CSDL csdl;
   srand(time(NULL));
   khoitao(csdl);
-  datquanhau(csdl, SOHAUCANDAT);
+  giaibaitoan(csdl, SOHAUCANDAT);
   xuat(csdl);
   return 0;
 }
@@ -124,12 +132,23 @@ void xuat (BanCo banco) {
   ;
 }
 
-void datquanhau (CSDL & csdl, unsigned soluong, unsigned trongso) {
+void giaibaitoan (CSDL & csdl, unsigned soluong) {
+  unsigned trongso = 0;
+  datquanhau(csdl, trongso, soluong);
+}
+
+void datquanhau (CSDL & csdl, unsigned & trongso, unsigned soluong) {
+  CSDL csdlmoi = csdl;
+  unsigned trongsothem = 0;
   for (unsigned x = 0; x != BanCo::KICHTHUOC; ++x) {
     for (unsigned y = 0; y != BanCo::KICHTHUOC; ++y) {
+      const ToaDo toado(x, y);
+      CSDL csdlss = csdl;
 
     }
   }
+  csdl = csdlmoi;
+  trongso += trongsothem;
 }
 
 unsigned ngaunhien (unsigned max) {
