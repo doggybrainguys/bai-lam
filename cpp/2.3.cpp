@@ -155,16 +155,15 @@ void datquanhau (CSDL & csdl, bool & thanhcong, unsigned & trongso, unsigned sol
           const ToaDo toado(x, y);
           CSDL csdlss = csdl;
           unsigned trongsoss = 0;
-          for (unsigned i = 0; i != csdl.dauvet.soluong; ++i) {
-            if (kiemtra(csdlss.dauvet, toado)) {
-              datquanhau(csdlss.dauvet, toado);
-              datquanhau(csdlss, thanhcongmoi, trongsoss, soluong);
-              if (thanhcongmoi) {
-                thanhcong = true;
-                if (trongsoss > trongsothem) {
-                  csdlmoi = csdlss;
-                  trongsothem = trongsoss;
-                }
+          if (kiemtra(csdlss.dauvet, toado)) {
+            csdlss.banco[toado].chiem = true;
+            datquanhau(csdlss.dauvet, toado);
+            datquanhau(csdlss, thanhcongmoi, trongsoss, soluong);
+            if (thanhcongmoi) {
+              thanhcong = true;
+              if (trongsoss > trongsothem) {
+                csdlmoi = csdlss;
+                trongsothem = trongsoss;
               }
             }
           }
