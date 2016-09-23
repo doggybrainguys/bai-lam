@@ -15,14 +15,19 @@ const unsigned TRONGSOTOIDA = 10;
 /* KIỂU DỮ LIỆU */
 
 struct QuanCo;
+struct ToaDo;
 struct BanCo;
 struct DauVet;
 struct CSDL;
-struct ToaDo;
 
 struct QuanCo {
   bool chiem;
   unsigned trongso;
+};
+
+struct ToaDo {
+  unsigned x, y;
+  ToaDo (unsigned _x = 0, unsigned _y = 0): x(_x), y(_y) {}
 };
 
 struct BanCo {
@@ -32,10 +37,10 @@ struct BanCo {
     QuanCo luoi[KICHTHUOC][KICHTHUOC];
     QuanCo day[SOQUANCO];
   } quanco; // 'luoi' và 'day' thực ra là một, cùng chiếm 1 vùng nhớ, chỉ khác về số chiều
-  QuanCo * const operator + (ToaDo toado) const {
+  QuanCo * operator + (ToaDo toado) {
     return & quanco.luoi[toado.x][toado.y];
   }
-  QuanCo & const operator [] (ToaDo toado) const {
+  QuanCo & operator [] (ToaDo toado) {
     return quanco.luoi[toado.x][toado.y];
   }
 };
@@ -49,11 +54,6 @@ struct DauVet {
 struct CSDL {
   BanCo banco;
   DauVet dauvet;
-};
-
-struct ToaDo {
-  unsigned x, y;
-  ToaDo (unsigned _x = 0, unsigned _y = 0): x(_x), y(_y) {}
 };
 
 /* CÁC HÀM CẦN XÂY DỰNG */
