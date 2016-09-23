@@ -184,7 +184,7 @@ void datquanhau (CSDL & csdl, bool & thanhcong, unsigned & trongso, unsigned sol
 
 bool kiemtra (DauVet dauvet, ToaDo toado) {
   for (unsigned i = 0; i != dauvet.soluong; ++i) {
-    if (kiemtra(toado, dauvet.dadat[i])) {
+    if (! kiemtra(toado, dauvet.dadat[i])) {
       return false;
     }
   }
@@ -192,7 +192,11 @@ bool kiemtra (DauVet dauvet, ToaDo toado) {
 }
 
 bool kiemtra (ToaDo a, ToaDo b) {
-  return a.x == b.x && a.y == b.y;
+  return (
+    a.x != b.x && a.y != b.y &&
+    a.x - b.x != a.y - b.y &&
+    a.x + b.x != a.y + b.y
+  );
 }
 
 void datquanhau (DauVet & dauvet, ToaDo toado) {
