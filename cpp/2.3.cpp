@@ -146,9 +146,8 @@ void datquanhau (CSDL & csdl, bool & thanhcong, unsigned & trongso, unsigned sol
   if (soluong) {
     thanhcong = false;
     if (csdl.dauvet.soluong != DauVet::KICHTHUOC) {
-      CSDL csdlmoi = csdl;
-      unsigned trongsothem = 0;
       bool thanhcongmoi;
+      trongso = 0;
       --soluong;
       for (unsigned x = 0; x != BanCo::KICHTHUOC; ++x) {
         for (unsigned y = 0; y != BanCo::KICHTHUOC; ++y) {
@@ -161,17 +160,13 @@ void datquanhau (CSDL & csdl, bool & thanhcong, unsigned & trongso, unsigned sol
             datquanhau(csdlss, thanhcongmoi, trongsoss, soluong);
             if (thanhcongmoi) {
               thanhcong = true;
-              if (trongsoss > trongsothem) {
-                csdlmoi = csdlss;
-                trongsothem = trongsoss;
+              if (trongsoss > trongso) {
+                csdl = csdlss;
+                trongso = trongsoss;
               }
             }
           }
         }
-      }
-      if (thanhcong) {
-        csdl = csdlmoi;
-        trongso = trongsothem;
       }
     }
   } else {
