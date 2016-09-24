@@ -12,11 +12,11 @@ using namespace std;
 int main ();
 
 // Nhập, xuất
-void nhap (unsigned & sotien, unsigned & * menhgia, unsigned & soloai);
+void nhap (unsigned & sotien, unsigned * & menhgia, unsigned & soloai);
 void xuat (unsigned * menhgia, unsigned * soto, unsigned soloai);
 
 // Chia tiền
-void chiatien (unsigned & * soto, unsigned * menhgia, unsigned soloai, unsigned sotien);
+void chiatien (unsigned * & soto, unsigned * menhgia, unsigned soloai, unsigned sotien);
 
 // Tiện ích
 void sapxep (unsigned * menhgia, unsigned soluong);
