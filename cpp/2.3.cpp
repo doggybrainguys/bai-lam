@@ -31,7 +31,7 @@ struct ToaDo {
 };
 
 struct BanCo {
-  static const unsigned KICHTHUOC = 8;
+  static const unsigned KICHTHUOC = SOHAUCANDAT;
   static const unsigned SOQUANCO = KICHTHUOC * KICHTHUOC;
   union {
     QuanCo luoi[KICHTHUOC][KICHTHUOC];
@@ -143,8 +143,6 @@ void giaibaitoan (CSDL & csdl, unsigned soluong) {
 }
 
 void datquanhau (CSDL & csdl, bool & thanhcong, unsigned & trongso, unsigned soluong) {
-  cout << endl;
-  xuat(csdl);
   if (soluong) {
     thanhcong = false;
     if (csdl.dauvet.soluong != DauVet::KICHTHUOC) {
