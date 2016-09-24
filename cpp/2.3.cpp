@@ -150,11 +150,13 @@ void datquanhau (CSDL & csdl, bool & thanhcong, unsigned & trongso, unsigned sol
         for (unsigned y = 0; y != BanCo::KICHTHUOC; ++y) {
           const ToaDo toado(x, y);
           CSDL csdlss = csdl;
+          QuanCo & quanco = csdlss.banco[toado];
           unsigned trongsoss = 0;
           if (kiemtra(csdlss.dauvet, toado)) {
-            csdlss.banco[toado].chiem = true;
+            quanco.chiem = true;
             datquanhau(csdlss.dauvet, toado);
             datquanhau(csdlss, thanhcongmoi, trongsoss, soluong);
+            trongsoss += quanco.trongso;
             if (thanhcongmoi) {
               thanhcong = true;
               if (trongsoss > trongso) {
