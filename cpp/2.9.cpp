@@ -79,5 +79,6 @@ bool chiatien (unsigned * & soto, unsigned * menhgia, unsigned soloai, unsigned 
 void sapxep (unsigned * menhgia, unsigned soloai) {
   for (unsigned i = 0; i != soloai; ++i)
     for (unsigned j = i; j != soloai; ++j)
-      swap(menhgia[i], menhgia[j]);
+      if (menhgia[i] < menhgia[j])
+        swap(menhgia[i], menhgia[j])
 }
