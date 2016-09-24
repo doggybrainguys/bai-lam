@@ -22,13 +22,15 @@ void nhap (DoVat & dovat);
 
 // Hàm xuất
 void xuat (DoVat * mang, unsigned soluong);
-void xuat (DoVat dovat);
 
 // Hàm Chọn đồ vật
 void chondovat (DoVat * & dich, unsigned & soluongdich, unsigned succhua, DoVat * nguon, unsigned soluongnguon);
 
 // Hàm sắp xếp: Tỉ lệ giatri/khoiluong giảm dần (hoặc khoiluong/giatri tăng dần)
 void sapxep (DoVat * mang, unsigned soluong);
+
+// Hàm tiện ích
+float * taomangtile (DoVat * mang, unsigned soluong);
 
 /* NỘI DUNG */
 
@@ -58,16 +60,49 @@ void nhap (DoVat & dovat) {
 }
 
 void xuat (DoVat * mang, unsigned soluong) {
-  cout << "Cac do vat da chon (GiaTri / KhoiLuong):\n";
-  for (unsigned i = 0; i != soluong; ++i) xuat(mang[i]);
-}
-
-void xuat (DoVat dovat) {
-  cout << " + " << dovat.giatri << " / " << dovat.khoiluong << endl;
+  unsigned tongkhoiluong = 0, tonggiatri = 0;
+  cout << "Cac do vat da chon (KhoiLuong : GiaTri):\n";
+  for (unsigned i = 0; i != soluong; ++i) {
+    DoVat dovat = mang[i];
+    cout << " + " << dovat.khoiluong << " : " << dovat.giatri << endl;
+    tongkhoiluong += dovat.khoiluong;
+    tonggiatri += dovat.giatri;
+  }
+  cout << "Tong khoi luong: " << tongkhoiluong << endl;
+  cout << "Tong gia tri: " << tonggiatri << endl;
 }
 
 void chondovat (DoVat * & dich, unsigned & soluongdich, unsigned succhua, DoVat * nguon, unsigned soluongnguon) {
   dich = new DoVat[soluongnguon];
-  soluongdich = 0; // Khởi tạo
-  // YOUR TEXT HERE...
+  soluongdich = 0;
+  sapxep(nguon, soluongnguon);
+  for (unsigned i = 0; i != soluongnguon; ++i) {
+    if (succhua >= nguon[i].khoiluong) {
+      dich[soluongdich] = nguon[i];
+      succhua -= nguon[i].khoiluong;
+      ++soluongdich;
+    }
+  }
+}
+
+void sapxep (DoVat * mang, unsigned soluong) {
+  float * tile = taomangtile(mang, soluong);
+  for (unsigned i = 0; i != soluong; ++i) {
+    for (unsigned j = i; j != soluong; ++j) {
+      if (tile[i] > tile[j]) {
+        swap(mang[i], mang[j]);
+        swap(tile[i], tile[j]);
+      }
+    }
+  }
+  delete [] tile;
+}
+
+float * taomangtile (DoVat * mang, unsigned soluong) {
+  float * tile = new float[soluong];
+  for (unsigned i = 0; i != soluong; ++i) {
+    DoVat dovat = mang[i];
+    tile[i] = float(dovat.khoiluong) / dovat.giatri;
+  }
+  return tile;
 }
