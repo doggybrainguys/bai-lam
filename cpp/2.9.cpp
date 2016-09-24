@@ -80,5 +80,5 @@ void sapxep (unsigned * menhgia, unsigned soloai) {
   for (unsigned i = 0; i != soloai; ++i)
     for (unsigned j = i; j != soloai; ++j)
       if (menhgia[i] < menhgia[j])
-        swap(menhgia[i], menhgia[j])
+        swap(menhgia[i], menhgia[j]);
 }
