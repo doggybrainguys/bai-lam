@@ -33,7 +33,7 @@ int main () {
   return 0;
 }
 
-void nhap (unsigned & sotien, unsigned & * menhgia, unsigned & soloai) {
+void nhap (unsigned & sotien, unsigned * & menhgia, unsigned & soloai) {
   cout << "Nhap so tien: ";
   cin >> sotien;
   cout << "Nhap so menh gia: ";
