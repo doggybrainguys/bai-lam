@@ -1,7 +1,7 @@
 // Sử dụng C-Free 5
 // Giải thuật Quay lui
 
-#include <iostream> // cin, cout
+#include <iostream> // cin, cout, cerr
 #include <cstdlib> // NULL
 
 using namespace std;
@@ -26,18 +26,18 @@ void xuat (int * dayso, PhepToan * pheptoan, unsigned soluong);
 char toantu (PhepToan pheptoan);
 
 // Hàm tìm đa thức
-void timdathuc (bool & thanhcong, PhepToan * & pheptoan, int tong, int * dayso, unsigned soluong);
+void timdathuc (bool & thanhcong, PhepToan * pheptoan, int tong, int * dayso, unsigned soluong);
 
 /* NỘI DUNG */
 
 int main () {
   int tong, * dayso;
   unsigned soluong;
-  PhepToan * pheptoan;
   bool thanhcong;
   nhap(tong, dayso, soluong);
+  PhepToan * pheptoan = new PhepToan[soluong];
   timdathuc(thanhcong, pheptoan, tong, dayso, soluong);
-  xuat(thanhcong, dayso, pheptoan, soluong - 1);
+  xuat(thanhcong, dayso, pheptoan, soluong);
   delete [] dayso;
   delete [] pheptoan;
   return 0;
@@ -57,19 +57,42 @@ void nhap (int & tong, int * & dayso, unsigned & soluong) {
 
 void xuat (bool thanhcong, int * dayso, PhepToan * pheptoan, unsigned soluong) {
   if (thanhcong) {
+    cout << "Da thuc:";
     xuat(dayso, pheptoan, soluong);
   } else {
-    cout << "Khong tim thay bieu thuc phu hop\n";
+    cerr << "Khong tim thay da thuc phu hop\n";
   }
 }
 
 void xuat (int * dayso, PhepToan * pheptoan, unsigned soluong) {
   for (unsigned i = 0; i != soluong; ++i) {
-    cout << dayso << ' ' << toantu(pheptoan[i]) << ' ';
+    cout << ' ' << toantu(pheptoan[i]) << dayso[i];
   }
-  cout << dayso[soluong] << endl;
+  cout << endl;
 }
 
 char toantu (PhepToan pheptoan) {
   return pheptoan == PhepToan::CONG ? '+' : '-';
+}
+
+void timdathuc (bool & thanhcong, PhepToan * pheptoan, int tong, int * dayso, unsigned soluong) {
+  if (soluong) {
+    const int sohang = * dayso;
+    bool thanhcongmoi;
+    timdathuc(thanhcongmoi, pheptoan + 1, tong - sohang, dayso + 1, soluong - 1);
+    if (thanhcongmoi) {
+      * pheptoan = PhepToan::CONG;
+      thanhcong = true;
+      return;
+    }
+    timdathuc(thanhcongmoi, pheptoan + 1, tong + sohang, dayso + 1, soluong - 1);
+    if (thanhcongmoi) {
+      * pheptoan = PhepToan::TRU;
+      thanhcong = true;
+      return;
+    }
+    thanhcong = false;
+    return;
+  }
+  thanhcong = ! tong;
 }
