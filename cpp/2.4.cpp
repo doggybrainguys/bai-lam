@@ -1,8 +1,8 @@
 // Sử dụng C-Free 5
 // Thuật toán Tham lam
 
-#include <iostream>
-#include <algorithm>
+#include <iostream> // cin, cout
+#include <algorithm> // swap
 
 using namespace std;
 
