@@ -143,12 +143,14 @@ void giaibaitoan (CSDL & csdl, unsigned soluong) {
 }
 
 void datquanhau (CSDL & csdl, bool & thanhcong, unsigned & trongso, unsigned soluong) {
+  cout << endl;
+  xuat(csdl);
   if (soluong) {
+    thanhcong = false;
     if (csdl.dauvet.soluong != DauVet::KICHTHUOC) {
       CSDL csdlmoi = csdl;
       unsigned trongsothem = 0;
       bool thanhcongmoi;
-      thanhcong = false;
       --soluong;
       for (unsigned x = 0; x != BanCo::KICHTHUOC; ++x) {
         for (unsigned y = 0; y != BanCo::KICHTHUOC; ++y) {
@@ -171,7 +173,7 @@ void datquanhau (CSDL & csdl, bool & thanhcong, unsigned & trongso, unsigned sol
       }
       if (thanhcong) {
         csdl = csdlmoi;
-        trongso += trongsothem;
+        trongso = trongsothem;
       }
     }
   } else {
