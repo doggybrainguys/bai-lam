@@ -55,3 +55,20 @@ void xuat (unsigned * menhgia, unsigned * soto, unsigned soloai) {
   }
   cout << "Tong so to: " << tongsoto << endl;
 }
+
+void chiatien (unsigned * & soto, unsigned * menhgia, unsigned soloai, unsigned sotien) {
+  unsigned i = 0;
+  soto = new unsigned[soloai];
+  sapxep(menhgia, soloai);
+  while (sotien) {
+    soto[i] = sotien % menhgia[i];
+    sotien /= menhgia[i];
+    ++i;
+  }
+}
+
+void sapxep (unsigned * menhgia, unsigned soloai) {
+  for (unsigned i = 0; i != soloai; ++i)
+    for (unsigned j = i; j != soloai; ++j)
+      swap(menhgia[i], menhgia[j]);
+}
