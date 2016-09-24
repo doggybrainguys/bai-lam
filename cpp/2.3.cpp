@@ -76,6 +76,7 @@ bool kiemtra (ToaDo a, ToaDo b);
 
 // Các hàm tiện ích
 unsigned ngaunhien (unsigned max);
+void xuatmang (unsigned * mang, unsigned soluong);
 
 /* NỘI DUNG */
 
@@ -110,6 +111,10 @@ void xuat (CSDL csdl) {
 
 void xuat (BanCo banco) {
   unsigned tongtrongso = 0;
+  unsigned trongso[SOHAUCANDAT];
+  unsigned x[SOHAUCANDAT];
+  unsigned y[SOHAUCANDAT];
+  unsigned dem = 0;
   cout << "Ban co:\n";
   for (unsigned i = 0; i != BanCo::KICHTHUOC; ++i) {
     for (unsigned j = 0; j != BanCo::KICHTHUOC; ++j) {
@@ -118,6 +123,10 @@ void xuat (BanCo banco) {
       if (quanco->chiem) {
         cout << '*';
         tongtrongso += quanco->trongso;
+        trongso[dem] = quanco->trongso;
+        x[dem] = j;
+        y[dem] = i;
+        ++dem;
       } else {
         cout << '.';
       }
@@ -125,12 +134,19 @@ void xuat (BanCo banco) {
     }
     cout << endl;
   }
-  cout << "Tong trong so (n): " << tongtrongso << endl;
   cout <<
     "Chu thich:\n"
-    " - Con trong:  .n\n"
-    " - Co hau:     *n\n"
+    " - Con trong:  .w\n"
+    " - Co hau:     *w\n"
   ;
+  cout << "Tong trong so (w): " << tongtrongso << endl;
+  cout << "Cac quan hau da dat:\n";
+  cout << " - x:";
+  xuatmang(x, SOHAUCANDAT);
+  cout << " - y:";
+  xuatmang(y, SOHAUCANDAT);
+  cout << " - w:";
+  xuatmang(trongso, SOHAUCANDAT);
 }
 
 void giaibaitoan (CSDL & csdl, unsigned soluong) {
@@ -199,4 +215,11 @@ bool kiemtra (ToaDo a, ToaDo b) {
 
 unsigned ngaunhien (unsigned max) {
   return max * rand() / RAND_MAX;
+}
+
+void xuatmang (unsigned * mang, unsigned soluong) {
+  for (unsigned i = 0; i != soluong; ++i) {
+    cout << ' ' << mang[i];
+  }
+  cout << endl;
 }
