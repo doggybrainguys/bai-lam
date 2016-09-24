@@ -84,6 +84,7 @@ int main () {
   CSDL csdl;
   srand(time(NULL));
   khoitao(csdl);
+  cout << "Xin cho...\n";
   giaibaitoan(csdl, SOHAUCANDAT);
   xuat(csdl);
   return 0;
