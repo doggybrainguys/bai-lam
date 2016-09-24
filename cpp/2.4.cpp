@@ -1,5 +1,5 @@
 // Sử dụng C-Free 5
-// Thuật toán Quy hoạch động
+// Thuật toán Tham lam
 
 #include <iostream>
 #include <algorithm>
