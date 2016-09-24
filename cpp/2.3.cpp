@@ -117,9 +117,10 @@ void xuat (BanCo banco) {
   unsigned dem = 0;
   cout << "Ban co:\n";
   for (unsigned i = 0; i != BanCo::KICHTHUOC; ++i) {
+    cout << endl;
     for (unsigned j = 0; j != BanCo::KICHTHUOC; ++j) {
       const QuanCo * const quanco = & banco.quanco.luoi[i][j];
-      cout << ' ';
+      cout << "\x20\x20";
       if (quanco->chiem) {
         cout << '*';
         tongtrongso += quanco->trongso;
@@ -134,13 +135,13 @@ void xuat (BanCo banco) {
     }
     cout << endl;
   }
-  cout <<
+  cout << endl <<
     "Chu thich:\n"
     " - Con trong:  .w\n"
     " - Co hau:     *w\n"
   ;
-  cout << "Tong trong so (w): " << tongtrongso << endl;
-  cout << "Cac quan hau da dat:\n";
+  cout << "\nTong trong so (w): " << tongtrongso << endl;
+  cout << "\nCac quan hau da dat:\n";
   cout << " - x:";
   xuatmang(x, SOHAUCANDAT);
   cout << " - y:";
