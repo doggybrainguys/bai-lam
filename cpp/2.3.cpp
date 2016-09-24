@@ -37,9 +37,6 @@ struct BanCo {
     QuanCo luoi[KICHTHUOC][KICHTHUOC];
     QuanCo day[SOQUANCO];
   } quanco; // 'luoi' và 'day' thực ra là một, cùng chiếm 1 vùng nhớ, chỉ khác về số chiều
-  QuanCo * operator + (ToaDo toado) {
-    return & quanco.luoi[toado.x][toado.y];
-  }
   QuanCo & operator [] (ToaDo toado) {
     return quanco.luoi[toado.x][toado.y];
   }
