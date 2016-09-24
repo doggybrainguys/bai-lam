@@ -4,6 +4,8 @@
 #include <iostream> // cin, cout
 #include <cstdlib> // NULL
 
+using namespace std;
+
 /* CÁC KIỂU DỮ LIỆU */
 
 enum PhepToan {
@@ -19,10 +21,9 @@ int main ();
 void nhap (int & tong, int * & dayso, unsigned & soluong);
 
 // Hàm xuất
-void xuat (bool ketqua, int * dayso = NULL, PhepToan * pheptoan = NULL, unsigned soluong = 0);
-
-// Hàm xuất đa thức
+void xuat (bool thanhcong, int * dayso = NULL, PhepToan * pheptoan = NULL, unsigned soluong = 0);
 void xuat (int * dayso, PhepToan * pheptoan, unsigned soluong);
+char toantu (PhepToan pheptoan);
 
 // Hàm tìm đa thức
 bool timdathuc (PhepToan * & pheptoan, int tong, int * dayso, unsigned soluong);
@@ -30,11 +31,12 @@ bool timdathuc (PhepToan * & pheptoan, int tong, int * dayso, unsigned soluong);
 /* NỘI DUNG */
 
 int main () {
-  int tong, * dayso, soluong;
+  int tong, * dayso;
+  unsigned soluong;
   PhepToan * pheptoan;
   nhap(tong, dayso, soluong);
-  bool ketqua = timdathuc(pheptoan, tong, dayso, soluong);
-  xuat(ketqua, dayso, pheptoan, soluong - 1);
+  bool thanhcong = timdathuc(pheptoan, tong, dayso, soluong);
+  xuat(thanhcong, dayso, pheptoan, soluong - 1);
   delete [] dayso;
   delete [] pheptoan;
   return 0;
@@ -50,4 +52,23 @@ void nhap (int & tong, int * & dayso, unsigned & soluong) {
   for (unsigned i = 0; i != soluong; ++i) {
     cin >> dayso[i];
   }
+}
+
+void xuat (bool thanhcong, int * dayso, PhepToan * pheptoan, unsigned soluong) {
+  if (thanhcong) {
+    xuat(dayso, pheptoan, soluong);
+  } else {
+    cout << "Khong tim thay bieu thuc phu hop\n";
+  }
+}
+
+void xuat (int * dayso, PhepToan * pheptoan, unsigned soluong) {
+  for (unsigned i = 0; i != soluong; ++i) {
+    cout << dayso << ' ' << toantu(pheptoan[i]) << ' ';
+  }
+  cout << dayso[soluong] << endl;
+}
+
+char toantu (PhepToan pheptoan) {
+  return pheptoan == PhepToan::CONG ? '+' : '-';
 }
