@@ -69,8 +69,8 @@ bool chiatien (unsigned * & soto, unsigned * menhgia, unsigned soloai, unsigned 
   soto = new unsigned[soloai];
   sapxep(menhgia, soloai);
   while (sotien && i != soloai) {
-    soto[i] = sotien % menhgia[i];
-    sotien /= menhgia[i];
+    soto[i] = sotien / menhgia[i];
+    sotien %= menhgia[i];
     ++i;
   }
   return i != soloai;
