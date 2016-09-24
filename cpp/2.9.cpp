@@ -14,9 +14,10 @@ int main ();
 // Nhập, xuất
 void nhap (unsigned & sotien, unsigned * & menhgia, unsigned & soloai);
 void xuat (unsigned * menhgia, unsigned * soto, unsigned soloai);
+void xuat ();
 
 // Chia tiền
-void chiatien (unsigned * & soto, unsigned * menhgia, unsigned soloai, unsigned sotien);
+bool chiatien (unsigned * & soto, unsigned * menhgia, unsigned soloai, unsigned sotien);
 
 // Tiện ích
 void sapxep (unsigned * menhgia, unsigned soluong);
@@ -26,8 +27,11 @@ void sapxep (unsigned * menhgia, unsigned soluong);
 int main () {
   unsigned sotien, soloai, * menhgia, * soto;
   nhap (sotien, menhgia, soloai);
-  chiatien (soto, menhgia, soloai, sotien);
-  xuat (menhgia, soto, soloai);
+  if (chiatien (soto, menhgia, soloai, sotien)) {
+    xuat(menhgia, soto, soloai);
+  } else {
+    xuat();
+  }
   delete [] menhgia;
   delete [] soto;
   return 0;
@@ -56,15 +60,20 @@ void xuat (unsigned * menhgia, unsigned * soto, unsigned soloai) {
   cout << "Tong so to: " << tongsoto << endl;
 }
 
-void chiatien (unsigned * & soto, unsigned * menhgia, unsigned soloai, unsigned sotien) {
+void xuat () {
+  cout << "Het tien le!\n";
+}
+
+bool chiatien (unsigned * & soto, unsigned * menhgia, unsigned soloai, unsigned sotien) {
   unsigned i = 0;
   soto = new unsigned[soloai];
   sapxep(menhgia, soloai);
-  while (sotien) {
+  while (sotien && i != soloai) {
     soto[i] = sotien % menhgia[i];
     sotien /= menhgia[i];
     ++i;
   }
+  return i != soloai;
 }
 
 void sapxep (unsigned * menhgia, unsigned soloai) {
