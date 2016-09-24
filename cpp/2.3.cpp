@@ -150,7 +150,7 @@ void xuat (BanCo banco) {
 }
 
 void giaibaitoan (CSDL & csdl, unsigned soluong) {
-  unsigned trongso = 0;
+  unsigned trongso;
   bool thanhcong;
   datquanhau(csdl, thanhcong, trongso, soluong);
 }
