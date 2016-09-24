@@ -1,7 +1,7 @@
 // Dùng C-Free 5
 // Giải thuật Tham lam
 
-#include <iostream> // cin, cout, endl
+#include <iostream> // cin, cout, cerr, endl
 #include <algorithm> // swap
 
 using namespace std;
@@ -13,8 +13,7 @@ int main ();
 
 // Nhập, xuất
 void nhap (unsigned & sotien, unsigned * & menhgia, unsigned & soloai);
-void xuat (unsigned * menhgia, unsigned * soto, unsigned soloai);
-void xuat ();
+void xuat (bool dutien, unsigned * menhgia, unsigned * soto, unsigned soloai);
 
 // Chia tiền
 bool chiatien (unsigned * & soto, unsigned * menhgia, unsigned soloai, unsigned sotien);
@@ -27,11 +26,8 @@ void sapxep (unsigned * menhgia, unsigned soluong);
 int main () {
   unsigned sotien, soloai, * menhgia, * soto;
   nhap (sotien, menhgia, soloai);
-  if (chiatien (soto, menhgia, soloai, sotien)) {
-    xuat(menhgia, soto, soloai);
-  } else {
-    xuat();
-  }
+  bool dutien = chiatien(soto, menhgia, soloai, sotien);
+  xuat (dutien, menhgia, soto, soloai);
   delete [] menhgia;
   delete [] soto;
   return 0;
@@ -49,7 +45,7 @@ void nhap (unsigned & sotien, unsigned * & menhgia, unsigned & soloai) {
   }
 }
 
-void xuat (unsigned * menhgia, unsigned * soto, unsigned soloai) {
+void xuat (bool dutien, unsigned * menhgia, unsigned * soto, unsigned soloai) {
   unsigned tongsoto = 0;
   cout << "Danh sach cac to can doi (MenhGia x SoTo):\n";
   for (unsigned i = 0; i != soloai; ++i) {
@@ -57,11 +53,10 @@ void xuat (unsigned * menhgia, unsigned * soto, unsigned soloai) {
     cout << " + " << mg << " x " << st << " = " << (mg * st) << endl;
     tongsoto += st;
   }
+  if (! dutien) {
+    cerr << "Het tien le!\n";
+  }
   cout << "Tong so to: " << tongsoto << endl;
-}
-
-void xuat () {
-  cout << "Het tien le!\n";
 }
 
 bool chiatien (unsigned * & soto, unsigned * menhgia, unsigned soloai, unsigned sotien) {
@@ -73,7 +68,7 @@ bool chiatien (unsigned * & soto, unsigned * menhgia, unsigned soloai, unsigned 
     sotien %= menhgia[i];
     ++i;
   }
-  return i != soloai;
+  return ! sotien;
 }
 
 void sapxep (unsigned * menhgia, unsigned soloai) {
