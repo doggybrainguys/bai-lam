@@ -26,7 +26,7 @@ void xuat (int * dayso, PhepToan * pheptoan, unsigned soluong);
 char toantu (PhepToan pheptoan);
 
 // Hàm tìm đa thức
-bool timdathuc (PhepToan * & pheptoan, int tong, int * dayso, unsigned soluong);
+bool timdathuc (bool & thanhcong, PhepToan * & pheptoan, int tong, int * dayso, unsigned soluong);
 
 /* NỘI DUNG */
 
@@ -34,8 +34,9 @@ int main () {
   int tong, * dayso;
   unsigned soluong;
   PhepToan * pheptoan;
+  bool thanhcong;
   nhap(tong, dayso, soluong);
-  bool thanhcong = timdathuc(pheptoan, tong, dayso, soluong);
+  timdathuc(thanhcong, pheptoan, tong, dayso, soluong);
   xuat(thanhcong, dayso, pheptoan, soluong - 1);
   delete [] dayso;
   delete [] pheptoan;
