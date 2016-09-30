@@ -40,6 +40,7 @@ int main () {
   nhap(nguon, soluongnguon, succhua);
   xuat(chondovat(succhua, nguon, soluongnguon));
   delete [] nguon;
+  cin.get();
   return 0;
 }
 

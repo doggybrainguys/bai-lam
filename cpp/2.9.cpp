@@ -30,6 +30,7 @@ int main () {
   xuat(dutien, menhgia, soto, soloaican);
   delete [] menhgia;
   delete [] soto;
+  cin.get();
   return 0;
 }
 

@@ -39,6 +39,7 @@ int main () {
   unsigned soluong;
   sieunguyento(danhsach, soluong, sochuso, 0);
   xuat(danhsach, soluong);
+  cin.get();
   return 0;
 }
 

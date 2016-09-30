@@ -86,6 +86,7 @@ int main () {
   khoitao(csdl);
   giaibaitoan(csdl, SOHAUCANDAT);
   xuat(csdl);
+  cin.get();
   return 0;
 }
 

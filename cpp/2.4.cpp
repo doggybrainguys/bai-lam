@@ -42,6 +42,7 @@ int main () {
   xuat(dich, soluongdich);
   delete [] nguon;
   delete [] dich;
+  cin.get();
   return 0;
 }
 

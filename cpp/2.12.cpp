@@ -40,6 +40,7 @@ int main () {
   xuat(thanhcong, dayso, pheptoan, soluong);
   delete [] dayso;
   delete [] pheptoan;
+  cin.get();
   return 0;
 }
 

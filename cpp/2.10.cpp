@@ -51,6 +51,7 @@ int main () {
   khoitao(nguoinhan2);
   chiakeo(nguoinhan1, nguoinhan2, nguon);
   xuat(nguoinhan1, nguoinhan2);
+  cin.get();
   return 0;
 }
 
