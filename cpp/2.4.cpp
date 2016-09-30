@@ -37,9 +37,9 @@ float * taomangtile (DoVat * mang, unsigned soluong);
 int main () {
   DoVat * nguon, * dich;
   unsigned soluongnguon, soluongdich, succhua;
-  nhap (nguon, soluongnguon, succhua);
-  chondovat (dich, soluongdich, succhua, nguon, soluongnguon);
-  xuat (dich, soluongdich);
+  nhap(nguon, soluongnguon, succhua);
+  chondovat(dich, soluongdich, succhua, nguon, soluongnguon);
+  xuat(dich, soluongdich);
   delete [] nguon;
   delete [] dich;
   return 0;
